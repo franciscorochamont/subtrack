@@ -4,7 +4,10 @@
 @theme {
     --color-background: #E5E1D8;
     --color-primary: #171717;
-    --color-secondary: #8A877F;
-    --font-google: 'Google Sans Flex', sans-serif;
+    --color-secondary: #77746D;
+    --font-plus: "Plus Jakarta Sans", sans-serif;
+    --color-card-background: #FBFAF7;
+    --color-card-border: #DDD9D0;
+    --color-card-border-hover: #A9A49A;
 }
 
