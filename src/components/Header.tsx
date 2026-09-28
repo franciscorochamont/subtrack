@@ -7,11 +7,11 @@ export default function Header() {
             <CreditCard />
         </div>
         <div>
-            <p className="text-xl text-primary font-bold tracking-tight font-google">
+            <p className="text-xl text-primary font-bold tracking-tight font-plus">
                 SubTrack
-                </p>
-            <p className="text-sm text-secondary font-google">
-                Tu dinero, bajo control.
+            </p>
+            <p className="text-sm text-secondary font-plus">
+                Your money, under control.
             </p>
         </div>
     </header>
