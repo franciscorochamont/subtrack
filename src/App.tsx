@@ -11,21 +11,23 @@ function App() {
     ]
 
   return (
-    <div className="min-h-screen px-5 py-8 sm:px-8 lg:px-28">
-        <Header />
-        <main className="mt-10">
-            <p className="font-plus text-secondary text-sm">Financial summary</p>
-            <p className="text-primary font-bold font-plus text-xl">Total Expenses</p>
-            <div className="grid gap-4 md:gap-4 md:grid-cols-3 mt-8">
-                {stats.map((stats) => (
-                    <StatCardExpense 
-                        key={stats.period}
-                        period={stats.period}
-                        total={stats.total}
-                    />
-                ))}
-            </div>
-        </main>
+    <div className="min-h-screen bg-background px-5 py-8 md:px-8 md:py-10 xl:px-x xl:py-y">
+        <div className="mx-auto w-full max-w-5xl">
+            <Header />
+            <main className="mt-10">
+                <p className="font-plus text-secondary text-sm">Financial summary</p>
+                <p className="text-primary font-bold font-plus text-xl">Total Expenses</p>
+                <div className="mt-8 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-3">
+                    {stats.map((stats) => (
+                        <StatCardExpense 
+                            key={stats.period}
+                            period={stats.period}
+                            total={stats.total}
+                        />
+                    ))}
+                </div>
+            </main>
+        </div>
     </div>
 
   )

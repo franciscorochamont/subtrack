@@ -8,23 +8,30 @@ const periodIcons: Record<ExpensePeriod, typeof CreditCard> = {
     Yearly: TrendingUp,
 }
 
+const periodAccent: Record<ExpensePeriod, string> = {
+    Daily: "from-[#8C7355] to-[#D7CBB8]",
+    Monthly: "from-neutral-800 to-neutral-300",
+    Yearly: "from-neutral-500 to-neutral-200",
+}
+
 export default function StatCardExpense({ period, total } : ExpenseStats) {
     const Icon = periodIcons[period]
+    const accent = periodAccent[period]
 
   return (
-    <div className="bg-card-background max-w-2xl border border-card-border
-        hover:border-card-border-hover hover:shadow-xl transition-shadow duration-500 ease-in-out cursor-pointer p-4 rounded-xl">
-        <div className="flex justify-between items-center">
-            <p className="text-secondary text-sm font-plus font-semibold">Expense {period}</p>
-            <div className="w-10 h-10 border border-card-border p-2 rounded-xl flex items-center justify-center">
-                <Icon 
-                    size={20}
-                />
+    <div className="flex h-full min-h-36 flex-col justify-between rounded-2xl border border-card-border bg-card-background p-5 cursor-pointer transition-shadow duration-500 ease-in-out hover:border-card-border-hover hover:shadow-xl">
+        <div className="flex items-start justify-between gap-3">
+            <p className="font-plus text-sm font-medium leading-5 text-secondary">Expense {period}</p>
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-card-border text-secondary">
+                <Icon size={18} strokeWidth={1.75} />
             </div>
         </div>
-        <p className="text-3xl text-primary font-bold font-plus">
-            {formatCurrency(total)}
-        </p>
+        <div className="mt-6">
+            <p className="font-plus text-3xl font-bold tracking-tight text-primary">
+                {formatCurrency(total)}
+            </p>
+            <div className={`mt-4 h-1.5 w-full rounded-full bg-linear-to-r ${accent}`} />
+        </div>
     </div>
   )
 }
