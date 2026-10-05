@@ -16,6 +16,7 @@ const periodLabels: Record<ExpensePeriod, string> = {
 
 export default function StatCardExpense({ period, total } : ExpenseStats) {
     const Icon = periodIcons[period]
+    const accent = periodAccent[period]
 
   return (
     <div className="bg-cards hover:bg-hover border border-cards-border
@@ -28,9 +29,12 @@ export default function StatCardExpense({ period, total } : ExpenseStats) {
                 />
             </div>
         </div>
-        <p className="text-3xl text-primary font-bold font-plus">
-            {formatCurrency(total)}
-        </p>
+        <div className="mt-6">
+            <p className="font-plus text-3xl font-bold tracking-tight text-primary">
+                {formatCurrency(total)}
+            </p>
+            <div className={`mt-4 h-1.5 w-full rounded-full bg-linear-to-r ${accent}`} />
+        </div>
     </div>
   )
 }
