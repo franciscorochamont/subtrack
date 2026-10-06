@@ -29,6 +29,7 @@ function App() {
                     ))}
                 </div>
             </div>
+            {/* CARDS SUSCRIPCIONES */}
             <div className="flex flex-col">
                 <p className="font-plus text-title-secondary text-sm uppercase">Gestiona tus gastos</p>
                 <p className="text-primary font-bold font-plus text-3xl mt-0.5">Todas tus suscripciones</p>
@@ -36,7 +37,6 @@ function App() {
                     <SuscriptionCards />
                 </div>
             </div>
-            {/* CARDS SUSCRIPCIONES */}
         </main>
     </div>
 

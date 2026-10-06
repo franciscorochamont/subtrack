@@ -8,6 +8,12 @@ const periodIcons: Record<ExpensePeriod, LucideIcon> = {
     Yearly: TrendingUp,
 }
 
+const periodAccent: Record<ExpensePeriod, string> = {
+    Daily: "from-[#8C7355] to-[#D7CBB8]",
+    Monthly: "from-neutral-800 to-neutral-300",
+    Yearly: "from-neutral-500 to-neutral-200",
+}
+
 const periodLabels: Record<ExpensePeriod, string> = {
     Daily: 'Gasto diario',
     Monthly: 'Gasto mensual',
