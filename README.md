@@ -1,75 +1,81 @@
-# React + TypeScript + Vite
+# SubTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Your money, under control.
 
-Currently, two official plugins are available:
+SubTrack is a small web app for keeping track of recurring subscriptions (Netflix, Disney+, Spotify…) and seeing how much they cost you per day, month and year. The UI is in Spanish and amounts are shown in Mexican pesos (MXN).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Status:** early work in progress. The layout, stat cards, subscription card and "add subscription" modal are built, but data is still hardcoded and nothing is saved yet.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Expense summary**: daily, monthly and yearly spending cards.
+- **Subscription cards**: name, billing cycle, price, next charge date and a renewal reminder.
+- **Add subscription modal**: a native `<dialog>` with fields for service name, price, billing cycle (`Mensual` / `Anual`) and billing date. Opened from the floating **+** button.
 
-## Expanding the ESLint configuration
+### Roadmap
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [ ] Handle the form submit and keep subscriptions in state
+- [ ] Calculate the daily, monthly and yearly totals from real data
+- [ ] Delete subscriptions
+- [ ] Save data in `localStorage`
+- [ ] Work out the next charge date and "renews in X days" automatically
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vite.dev)
+- [Tailwind CSS v4](https://tailwindcss.com) (via `@tailwindcss/vite`)
+- [lucide-react](https://lucide.dev) for icons
+- [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) font
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting started
 
+You need [Node.js](https://nodejs.org) (20+) and [pnpm](https://pnpm.io).
+
+```bash
+git clone https://github.com/franciscorochamont/subtrack.git
+cd subtrack
+pnpm install
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the URL Vite prints (usually http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Command        | What it does                              |
+| -------------- | ----------------------------------------- |
+| `pnpm dev`     | Start the dev server with hot reload      |
+| `pnpm build`   | Type-check and build for production (`dist/`) |
+| `pnpm preview` | Serve the production build locally        |
+| `pnpm lint`    | Run ESLint                                |
+
+## Project structure
 
 ```
+src/
+├── App.tsx                  # Page layout and modal state
+├── main.tsx                 # React entry point
+├── index.css                # Tailwind import and theme tokens
+├── components/
+│   ├── Header.tsx           # Logo and tagline
+│   ├── StatCardExpense.tsx  # Daily / monthly / yearly total card
+│   ├── SuscriptionCards.tsx # Single subscription card
+│   ├── FloatingAddButton.tsx# "+" button that opens the modal
+│   ├── Modal.tsx            # "Add subscription" dialog and form
+│   └── form/                # Reusable form pieces (FormField, Input)
+├── data/
+│   └── ciclo.ts             # Billing cycle options
+├── types/
+│   └── index.ts             # Shared TypeScript types
+└── utils/
+    └── formatCurrency.ts    # MXN currency formatting
+```
+
+## Styling
+
+Colors and fonts are defined as Tailwind theme tokens in [`src/index.css`](src/index.css) using `@theme`, so they can be used as normal utilities (`bg-cards`, `text-primary`, `border-cards-border`, `font-plus`, …). To change the palette, edit the values there instead of hardcoding colors in components.
+
+## Contributing
+
+Work happens on feature branches (`feat-...`) that get merged into `main` through pull requests. Commit messages follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, …).
