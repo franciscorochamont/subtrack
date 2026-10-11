@@ -26,4 +26,6 @@
     --color-border-urgent: #C8A96B;
     --color-text-urgent: #8B6F3D;
 
+    --color-bg-modal: rgba(23,23,23,.35);
+    --color-shadow-modal: rgba(23,23,23,.14)
 }

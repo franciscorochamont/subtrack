@@ -1,7 +1,10 @@
 import Header from "./components/Header";
+import FloatingAddButton from "./components/FloatingAddButton";
 import StatCardExpense from "./components/StatCardExpense";
 import SuscriptionCards from "./components/SuscriptionCards";
 import type { ExpenseStats } from './types/index';
+import { useState } from "react";
+import Modal from "./components/Modal";
 
 function App() {
 
@@ -11,10 +14,13 @@ function App() {
         { period: 'Yearly', total: 0, },
     ]
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
-    <div className="min-h-screen px-5 py-8 sm:px-8 lg:px-28">
+    <div className="min-h-screen px-5 py-8 sm:px-8 lg:py-12">
+      <div className="mx-auto w-full max-w-5xl">
         <Header />
-        <main className="flex flex-col gap-8 mt-10">
+        <main className="flex flex-col gap-8 mt-10 relative">
             {/* CARDS TOTALES */}
             <div>
                 <p className="font-plus text-title-secondary text-sm uppercase">Resumen financiero</p>
@@ -38,6 +44,14 @@ function App() {
                 </div>
             </div>
         </main>
+      </div>
+        <FloatingAddButton
+            onClick={() => setIsModalOpen(true)}
+        />
+        <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+        />
     </div>
 
   )

@@ -5,3 +5,4 @@ export type ExpenseStats = {
     total: number;
 }
 
+export type Ciclo = 'Mensual' | 'Anual';
