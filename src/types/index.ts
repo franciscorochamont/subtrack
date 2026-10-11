@@ -6,3 +6,11 @@ export type ExpenseStats = {
 }
 
 export type Ciclo = 'Mensual' | 'Anual';
+
+export type Suscription = {
+    id: number;
+    name: string;
+    cycle: Ciclo;
+    amount: number;
+    fechaCobro: string;
+}

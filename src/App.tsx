@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import FloatingAddButton from "./components/FloatingAddButton";
 import StatCardExpense from "./components/StatCardExpense";
 import SuscriptionCards from "./components/SuscriptionCards";
-import type { ExpenseStats } from './types/index';
+import type { ExpenseStats, Suscription } from './types/index';
 import { useState } from "react";
 import Modal from "./components/Modal";
 
@@ -15,6 +15,16 @@ function App() {
     ]
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [suscriptions, setSuscriptions] = useState<Suscription[]>([])
+
+    function handleAddSuscription(newSuscription: Suscription) {
+        setSuscriptions(prev => [...prev, newSuscription])
+        setIsModalOpen(false)
+    }
+
+    function handleDeleteSuscription(id: number) {
+        setSuscriptions(prev => prev.filter(suscription => suscription.id !== id))
+    }
 
   return (
     <div className="min-h-screen px-5 py-8 sm:px-8 lg:py-12">
@@ -40,7 +50,19 @@ function App() {
                 <p className="font-plus text-title-secondary text-sm uppercase">Gestiona tus gastos</p>
                 <p className="text-primary font-bold font-plus text-3xl mt-0.5">Todas tus suscripciones</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-7">
-                    <SuscriptionCards />
+                    {suscriptions.length === 0 ? (
+                        <p className="col-span-full text-center font-plus text-title-secondary py-10">
+                            Aún no tienes suscripciones. Agrega una con el botón +.
+                        </p>
+                    ) : (
+                        suscriptions.map((suscription) => (
+                            <SuscriptionCards
+                                key={suscription.id}
+                                suscription={suscription}
+                                onDelete={handleDeleteSuscription}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
         </main>
@@ -51,6 +73,7 @@ function App() {
         <Modal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
+            onAdd={handleAddSuscription}
         />
     </div>
 

@@ -1,11 +1,35 @@
+import type { SubmitEvent } from "react";
 import { cicloCobro } from "../data/ciclo";
+import type { Ciclo, Suscription } from "../types/index";
 import FormField from "./Form/FormField";
 import Input from "./Form/Input";
 import Select from "./Form/Select";
 
-export default function AddSubscriptionForm() {
+type AddSubscriptionFormProps = {
+    onAdd: (suscription: Suscription) => void;
+}
+
+export default function AddSubscriptionForm({ onAdd }: AddSubscriptionFormProps) {
+
+    function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const name = String(formData.get('nombre'));
+        const amount = Number(formData.get('precio'));
+        if (!name || Number.isNaN(amount) || amount <= 0) return;
+
+        onAdd({
+            id: Date.now(),
+            name,
+            amount,
+            cycle: formData.get('ciclo') as Ciclo,
+            fechaCobro: String(formData.get('fechacobro')),
+        });
+        e.currentTarget.reset();
+    }
+
     return (
-        <form className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <FormField label="Nombre del servicio" htmlFor="nombre">
                 <Input id="nombre" name="nombre" type="text" placeholder="ej: Disney+" required />
             </FormField>
