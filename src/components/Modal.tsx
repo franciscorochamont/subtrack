@@ -1,13 +1,15 @@
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import type { Suscription } from "../types/index";
 import AddSubscriptionForm from "./AddSubscriptionForm";
 
 type ModalProps = {
     isOpen: boolean;
     onClose: () => void;
+    onAdd: (suscription: Suscription) => void;
 };
 
-export default function Modal({ isOpen, onClose }: ModalProps) {
+export default function Modal({ isOpen, onClose, onAdd }: ModalProps) {
 
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -52,7 +54,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                         <X size={18} />
                     </button>
                 </div>
-                <AddSubscriptionForm />
+                <AddSubscriptionForm onAdd={onAdd} />
             </div>
         </dialog>
     );
